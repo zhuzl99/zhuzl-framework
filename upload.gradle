@@ -1,0 +1,19 @@
+apply plugin: 'maven'
+//上传到nexus
+uploadArchives {
+    configuration = configurations.archives
+    repositories {
+        mavenDeployer {
+            snapshotRepository(url: snapshotsUrl) {
+                authentication(userName: username, password: password)
+            }
+            repository(url: releaseUrl) {
+                authentication(userName: username, password: password)
+            }
+            pom.version = "$project.version"
+            pom.artifactId = "$project.name"
+            pom.groupId = "$project.group"
+
+        }
+    }
+}
