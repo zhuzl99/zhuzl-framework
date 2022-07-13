@@ -22,11 +22,10 @@ allprojects {
     apply plugin: 'io.spring.dependency-management'
 
     group = 'io.github.zhuzl99'
-    version = '2022.7.3-SNAPSHOT'
+    version = '2022.7.5-SNAPSHOT'
 
     ext {
         set('springCloudVersion', '2021.0.1')
-        set('frameworkVersion', 'M1')
     }
 
     repositories {
@@ -47,7 +46,7 @@ allprojects {
 }
 
 subprojects {
-    apply plugin: 'java-library'
+    apply plugin: 'java'
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
@@ -75,6 +74,20 @@ subprojects {
                 version = "$project.version"
                 // 上传source，这样使用方可以看到方法注释
                 artifact "build/libs/$project.name-$project.version-plain.jar"
+
+                // 处理pom问题
+                pom {
+                    withXml {
+                        def dependenciesNode = asNode().appendNode('dependencies')
+                        configurations.implementation.allDependencies.withType(ModuleDependency) {
+                            ModuleDependency dp ->
+                                def dependencyNode = dependenciesNode.appendNode('dependency')
+                                dependencyNode.appendNode('groupId', dp.group)
+                                dependencyNode.appendNode('artifactId', dp.name)
+                                dependencyNode.appendNode('version', dp.version)
+                        }
+                    }
+                }
             }
         }
 
