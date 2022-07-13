@@ -85,7 +85,18 @@ subprojects {
                                 dependencyNode.appendNode('groupId', dp.group)
                                 dependencyNode.appendNode('artifactId', dp.name)
                                 dependencyNode.appendNode('version', dp.version)
+
+                                // for exclusions
+                                if (!dp.excludeRules.isEmpty()) {
+                                    def exclusions = dependencyNode.appendNode('exclusions')
+                                    dp.excludeRules.each { ExcludeRule ex ->
+                                        def exclusion = exclusions.appendNode('exclusion')
+                                        exclusion.appendNode('groupId', ex.group)
+                                        exclusion.appendNode('artifactId', ex.module)
+                                    }
+                                }
                         }
+
                     }
                 }
             }
