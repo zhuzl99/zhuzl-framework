@@ -1,12 +1,12 @@
 buildscript {
     ext {
         springBootVersion = '2.6.3'
+        springCloudVersion = '2021.0.1'
+        springManagementVersion = '1.0.12.RELEASE'
     }
     repositories {
         mavenLocal()
-        maven {
-            url "https://maven.aliyun.com/repository/public"
-        }
+        maven { url "https://maven.aliyun.com/repository/public" }
         mavenCentral()
     }
     dependencies {
@@ -22,11 +22,7 @@ allprojects {
     apply plugin: 'io.spring.dependency-management'
 
     group = 'io.github.zhuzl99'
-    version = '2022.7.5-SNAPSHOT'
-
-    ext {
-        set('springCloudVersion', '2021.0.1')
-    }
+    version = '2022.7.4-SNAPSHOT'
 
     repositories {
         mavenLocal()
