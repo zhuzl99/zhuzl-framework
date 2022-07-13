@@ -1,4 +1,4 @@
-package com.zhuzl.framework.xxl;
+package io.github.zhuzl99.xxl;
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

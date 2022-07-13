@@ -1,4 +1,4 @@
-package com.zhuzl.framework.xxl;
+package io.github.zhuzl99.xxl;
 
 import groovy.util.logging.Slf4j;
 import org.junit.jupiter.api.Test;

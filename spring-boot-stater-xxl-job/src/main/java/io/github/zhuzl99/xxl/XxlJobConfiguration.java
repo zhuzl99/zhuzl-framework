@@ -1,4 +1,4 @@
-package com.zhuzl.framework.xxl;
+package io.github.zhuzl99.xxl;
 
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import org.springframework.context.annotation.Bean;

@@ -1,0 +1,41 @@
+pom {
+    name = 'My Library'
+    description = 'A concise description of my library'
+    url = 'https://github.com/zhuzl99/zhuzl-framework'
+    properties = [
+    ]
+    licenses {
+        license {
+            name = 'The Apache License, Version 2.0'
+            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+        }
+    }
+    developers {
+        developer {
+            id = 'zhuzl'
+            name = 'zhuzl'
+            email = 'zhu201510521@163.com'
+        }
+    }
+    scm {
+        connection = 'scm:git:git://github.com/zhuzl99/zhuzl-framework.git'
+        developerConnection = 'scm:git:ssh://github.com/zhuzl99/zhuzl-framework.git'
+        url = 'https://github.com/zhuzl99/zhuzl-framework'
+    }
+}
+
+apply plugin: 'idea'
+apply plugin: 'maven-publish'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+
+plugins {
+    id 'idea'
+    id 'maven-publish'
+    id "org.springframework.boot:${springBootVersion}"
+    id 'io.spring.dependency-management:v1.0.12.RELEASE'
+}
+
+
+

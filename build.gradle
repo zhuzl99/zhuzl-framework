@@ -15,13 +15,14 @@ buildscript {
 }
 
 allprojects {
+    // 引入插件
     apply plugin: 'idea'
     apply plugin: 'maven-publish'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
-    group = 'com.zhuzl'
-    version = 'M1'
+    group = 'io.github.zhuzl99'
+    version = '2022.7.3-SNAPSHOT'
 
     ext {
         set('springCloudVersion', '2021.0.1')
@@ -46,7 +47,7 @@ allprojects {
 }
 
 subprojects {
-    apply plugin: 'java'
+    apply plugin: 'java-library'
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
@@ -65,8 +66,28 @@ subprojects {
     bootJar {
         enabled = false
     }
-    uploadArchives {
-        enabled = true
+    // 发布到远程仓库
+    publishing {
+        publications {
+            sonatype(MavenPublication) {
+                groupId = "$project.group"
+                artifactId = "$project.name"
+                version = "$project.version"
+                // 上传source，这样使用方可以看到方法注释
+                artifact "build/libs/$project.name-$project.version-plain.jar"
+            }
+        }
+
+        repositories {
+            maven {
+                url = version.endsWith('SNAPSHOT') ? snapshotsUrl : releaseUrl
+                // 仓库用户名密码
+                credentials {
+                    username = susername
+                    password = spassword
+                }
+            }
+        }
     }
     dependencies {
         compileOnly("org.projectlombok:lombok")
